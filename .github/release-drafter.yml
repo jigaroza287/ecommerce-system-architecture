@@ -1,0 +1,19 @@
+name_template: "v$NEXT_PATCH - Draft"
+tag_template: "v$NEXT_PATCH"
+categories:
+  - title: "🚀 Features"
+    labels:
+      - "type:feature"
+  - title: "🐛 Fixes"
+    labels:
+      - "type:bug"
+  - title: "🧰 Chores"
+    labels:
+      - "type:chore"
+change_template: "- $TITLE by @$AUTHOR in $SHORT_LINK"
+template: |
+  ## What's Changed
+  $CHANGES
+
+  ## Notes
+  - Auto-generated draft
