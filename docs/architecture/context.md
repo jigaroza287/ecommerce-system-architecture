@@ -1,6 +1,6 @@
 # 🌐 Context Diagram & System Boundaries
 
-**Path:** `docs/hld/context-diagram.md`
+**Path:** `docs/architecture/context.md`
 
 ## 1. Context Diagram (Mermaid)
 
@@ -13,20 +13,14 @@ graph LR
   API --> DB[(Primary RDBMS - Postgres)]
   API -->|enqueue| Queue[(Job Queue - Redis/RabbitMQ)]
   Queue -->|process| Worker[Background Worker]
-  Worker --> EmailSvc[Email Service (SMTP / Dev Mailer)]
+  Worker --> EmailSvc["Email Service (SMTP / Dev Mailer)"]
   API -->|simulate| MockPay[Mock Payment Gateway]
   MockPay -->|webhook| API
 ```
 
 ---
 
-## 2. Personas / Primary Use Cases
-
-- **Customer (Primary Persona):** Browses catalog, searches products, adds items to cart, completes checkout, and views order history. Primary goal: fast, reliable shopping flow.
-- **Admin (Secondary Persona):** Manages product catalog, updates inventory and prices, and reviews orders. Primary goal: efficient catalog operations and order oversight.
-- **DevOps / SRE (Tertiary Persona):** Deploys and operates the system, monitors health, responds to incidents, and scales infrastructure as needed.
-
-## 3. External Actors
+## 2. External Actors
 
 - **User (Customer):** browses the product catalog, manages cart, places orders, and views order history.
 - **Admin:** manages product catalog, monitors and updates order status.
@@ -35,7 +29,7 @@ graph LR
 
 ---
 
-## 4. System Boundaries & Notes
+## 3. System Boundaries & Notes
 
 - The system is implemented as a **modular monolith** for MVP.
   - Modules/domains: `auth`, `catalog`, `cart`, `orders`, `admin`, `jobs`.
@@ -45,11 +39,5 @@ graph LR
 - **External integrations:**
   - Payment processing is simulated via a mock gateway (real gateway deferred).
   - Notifications limited to email in MVP (SMS/Push deferred).
-
----
-
-## 5. ADR Link (Decision Reference)
-
-- See ADR 0001 — _Start with a Modular Monolith_ for the rationale and consequences of choosing a monolith for MVP: `docs/architecture/adr-0001-modular-monolith.md`
 
 ---
